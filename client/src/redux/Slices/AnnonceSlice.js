@@ -30,9 +30,9 @@ export const allAnnonces = createAsyncThunk("annonce/Annonces", async () => {
     }
   });
   // update annonce
-  export const updateAnnonce = createAsyncThunk("annonce/update/:id", async (id) => {
+  export const updateAnnonce = createAsyncThunk("annonce/update/:id", async ({id,annonce}) => {
     try {
-      let response = await axios.put(`http://localhost:5000/annonce/update/${id}`) 
+      let response = await axios.put(`http://localhost:5000/annonce/update/${id}`,annonce) 
         return response.data;
     } catch (error) {
         console.log(error)

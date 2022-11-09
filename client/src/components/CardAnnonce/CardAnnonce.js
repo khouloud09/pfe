@@ -8,32 +8,34 @@ const CardAnnonce = ({annonce}) => {
   return (
     <>
          <div className='box_annonce shadow' >
-              <div className='img'>
+              <div className='pic'>
                 <img src={annonce?.galerie[0]?.url}  alt='' />
               </div>
               <div className='text'>
                 <div className='category flex'>
-                 <span className={`CardAnnonce ${annonce.typeAnnonce === "A Louer" ? "reserver" : annonce.typeAnnonce === "A Vendre" ? "#25b579" : "#ff9800" }`}>{annonce.typeAnnonce}</span>
+                 <span className={`CardAnnonce ${annonce.typeAnnonce === "A Louer" ? "louer" : annonce.typeAnnonce === "A vendre" ? "vendre" :"louer" }`}>{annonce.typeAnnonce}</span>
                   <i><FontAwesomeIcon icon={faHeart} /></i>
                 </div>
                <Link to={`/details/${annonce.titre}`} state={{ annonce }}> <h4>{annonce.titre} </h4></Link>
                 <p>
-                <i><FontAwesomeIcon icon={faLocationDot} /></i> {annonce.localisationMap.lat}/{annonce.localisationMap.lng}
+                <i><FontAwesomeIcon icon={faLocationDot} /></i> {annonce.adress}
                 </p>
-                <ul>
+                <ul className='flex'>
                 <li><i><FontAwesomeIcon icon={faBed} /></i> {annonce.nbrChambre} </li>  
                 <li> <i><FontAwesomeIcon icon={faBath} /></i> {annonce.nbrSalleDeBain}</li>
                 <li> <i><FontAwesomeIcon icon={faAreaChart} /></i> {annonce.surfaceHabitable}</li>
                 </ul>
               </div>
-              <div className='button flex'>
+              <div className='card_bottom'>
+           
+                  <h3 className='btn3'>{annonce.categorie}</h3>
+             
                 <div>
-                  <button className='btn2'>{annonce.prix}</button> <label htmlFor=''>/DT</label>
+                <span>{annonce.prix}</span> <label htmlFor=''>/DT</label>
                 </div>
-                <span>{annonce.categorie}</span>
               </div>
             </div>
-          
+            
     </>
   )
 }

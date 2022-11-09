@@ -114,7 +114,6 @@ router.delete("/delete/:id", async (req, res) => {
 
  //get current user
 router.get("/current", isAuth(), (req, res) => {
-  console.log(process.env.SecretOrKey)
   res.status(200).send({ user: req.user });
 });
 

@@ -62,6 +62,7 @@ router.get("/:categorie", async (req, res) => {
 
 // update annonce
 router.put('/update/:id',async(req,res) => {
+  console.log(req.body)
     try {
         const result = await Annonce.findByIdAndUpdate({_id:req.params.id},{$set:req.body},{new:true});
         res.send({annonce:result,msg:"annonce updated successfully"})
