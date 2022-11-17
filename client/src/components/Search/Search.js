@@ -4,9 +4,10 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import './Search.css'
 import { useDispatch } from 'react-redux'
 import { annonceFilter } from '../../redux/Slices/AnnonceSlice'
+import { Link } from 'react-router-dom'
 
 
-const Search = ({setSearchTerm}) => {
+const Search = () => {
   const [text, setText] = useState({});
  const dispatch= useDispatch();
  
@@ -15,9 +16,11 @@ const Search = ({setSearchTerm}) => {
   
     <>
          <div className='container_box'>
-          
-
-          <div className='flex'>
+          <div className='container'>
+         <button>Trouver un offre</button>
+       <Link to="/annonce"> <button>Déposer votre annonce</button> </Link>
+       </div>
+          <div className='tab flex'>
             <div className='box'>
               {/* <input list='offre' placeholder="Type de l'offre"
               onChange={(e) => setText({...text,typeAnnonce:e.target.value})}

@@ -26,15 +26,13 @@ const UserSchema = new schema({
         type:String,
         required: true
     },
+    likes: {
+        type: [String]
+      },
     isAdmin:{ 
               type:Boolean,
               default:false
             },
-    listFavoris:{
-             type:[String],
-             default:[]   
-            },
-      
 },
     { timestamps: true }
 );

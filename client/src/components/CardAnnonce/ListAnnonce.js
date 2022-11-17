@@ -10,13 +10,15 @@ const ListAnnonce = () => {
     
   return (
    <>
+   <div className='list_annonce'>
           <h2>NOS ANNONCES LES PLUS RÉCENTES </h2>
          <div className='content grid3 mtop'>
           
         {Annonces?.map((annonce, index) => 
-    <CardAnnonce key={index} annonce={annonce}/>
+    <CardAnnonce key={index} annonce={annonce} />
            
         )}
+      </div>
       </div>
       </>
   )

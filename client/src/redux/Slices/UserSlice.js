@@ -63,18 +63,64 @@ export const getUserByID = createAsyncThunk("user/get/:id", async (id) => {
         console.log(error);
       }
     });
+    // update user
+    export const updateUser = createAsyncThunk("user/update", async ({id,update}) => {
+     
+      try {
+     let response = await axios.put(`http://localhost:5000/user/update/${id}`,update);
+     return await response.data;
+   } catch (error) {
+     console.log(error);
+   }
+ });
+ // update password
+ export const updateUserPassword = createAsyncThunk(
+  "user/updatePassword",
+  async ({id,password}) => {
+    try {
+      let response = await axios.put(
+        `http://localhost:5000/user/updatePassword/${id}`,
+        password
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+export const likeAnnonce = createAsyncThunk("annonce/like", async ({id_user,annonceId}) => {
+
+  try {
+    let response = await axios.patch(`http://localhost:5000/annonce/like/${id_user}`,annonceId) 
+      return response.data;
+  } catch (error) {
+      console.log(error)
+  }
+});
+export const unLikeAnnonce = createAsyncThunk("annonce/like", async ({id_user,annonceId}) => {
+
+  try {
+    let response = await axios.patch(`http://localhost:5000/annonce/unlike/${id_user}`,annonceId) 
+      return response.data;
+  } catch (error) {
+      console.log(error)
+  }
+});
 const initialState = {
     user: null,
     status:null,
     users:[],
     searchedUser:null,
+    newuserupdated: {},
+
+    userUpdated: null,
   }
   
   const UserSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        logout: (state, action) => {
+        logout: (state) => {
             state.user = null;
             localStorage.removeItem("token");
           },
@@ -149,6 +195,53 @@ const initialState = {
             },
             [deleteUser.pending]: (state) => {
               state.status = "pending";
+            },
+            [updateUser.pending]: (state) => {
+              state.status = "pending";
+           
+            },
+            [updateUser.fulfilled]: (state, action) => {
+              state.status = "success";
+              state.newuserupdated = action.payload?.userUpdated;
+             
+             
+            },
+            [updateUser.rejected]: (state) => {
+              state.status = "fail";
+           
+            },
+            // update password
+            [updateUserPassword.pending]: (state) => {
+              state.status = "pending";
+            },
+            [updateUserPassword.fulfilled]: (state) => {
+              state.status = "success";
+          
+            },
+            [updateUserPassword.rejected]: (state) => {
+              state.status = "fail";
+            },
+             // like annonce
+          [likeAnnonce.pending]: (state) => {
+            state.status = "pending";
+          },
+          [likeAnnonce.fulfilled]: (state, action) => {
+            state.status = "success";
+            state.user = action.payload?.user;
+          },
+          [likeAnnonce.rejected]: (state) => {
+            state.status = "failed";
+          },
+            // unlike annonce
+            [unLikeAnnonce.pending]: (state) => {
+              state.status = "pending";
+            },
+            [unLikeAnnonce.fulfilled]: (state, action) => {
+              state.status = "success";
+              state.user = action.payload?.user;
+            },
+            [likeAnnonce.rejected]: (state) => {
+              state.status = "failed";
             },
     },
   })

@@ -1,20 +1,34 @@
- import React, { useState } from 'react'
- import {Link} from "react-router-dom"
+import React, { useEffect, useState } from 'react'
+import { Link } from "react-router-dom"
 import { nav } from './data/Data'
 import "./Navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRightToBracket, faUser } from '@fortawesome/free-solid-svg-icons'
+import { logout, userCurrent } from '../redux/Slices/UserSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAnnonceById } from '../redux/Slices/AnnonceSlice'
 
 
- const Navbar = () => {
+const Navbar = ({favLength}) => {
+
   const [navList, setNavList] = useState(false)
+  const User = useSelector((state) => state.user?.user)
+  const isAuth = localStorage.getItem('token')
+  const dispatch = useDispatch();
 
-   return (
-     <div>
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(userCurrent());
+      dispatch(getAnnonceById());
+    }
+  }, [dispatch, isAuth]);
+
+  return (
+    <div>
       <header>
         <div className='container flex'>
           <div className='logo'>
-           <img className='homeLogo' src="./images/logoIMMO.png" alt="logo" />
+            <img className='homeLogo' src="./images/logoIMMO.png" alt="logo" />
           </div>
           <div className='nav'>
             <ul className={navList ? "small" : "flex"}>
@@ -26,14 +40,45 @@ import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
             </ul>
           </div>
           <div className='button flex'>
-            <h4>
-              <span>0</span> Mes Favoris
-            </h4>
-            <Link to="/login">
-            <button className='btn1'>
-              <i><FontAwesomeIcon icon={faArrowRightToBracket} /></i> Sign In
-            </button>
+            {isAuth ? (
+              <>
+                <h4>
+                  <span>{favLength}</span> Mes Favoris
+                </h4>
+                {User?.isAdmin ? (
+                  <>
+                  <Link to="/dashboard">
+                    <div className="compte"  >
+                      <i><FontAwesomeIcon icon={faUser} style={{ width: "50px" }} /></i></div>
+                  </Link>
+                  <Link to="/">
+                  <button className='btn1' onClick={()=>{dispatch(logout()) }}>
+                    <i><FontAwesomeIcon icon={faArrowRightToBracket} /></i> Logout
+                  </button>
+                </Link>
+                </>
+                )
+                  : (
+                    <>
+                    <Link to="/DashUser">
+                      <div className="compte" >
+                        <i><FontAwesomeIcon icon={faUser} style={{ width: "50px" }} /></i></div>
+                    </Link>
+                    <Link to="/">
+              <button className='btn1' onClick={()=>{dispatch(logout()) }}>
+                <i><FontAwesomeIcon icon={faArrowRightToBracket} /></i> Logout
+              </button>
             </Link>
+                    </>
+                  )
+                }
+              </>
+            ) : (<Link to="/login">
+              <button className='btn1'>
+                <i><FontAwesomeIcon icon={faArrowRightToBracket} /></i> Sign In
+              </button>
+            </Link>
+            )}
           </div>
 
           <div className='toggle'>
@@ -41,8 +86,8 @@ import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
           </div>
         </div>
       </header>
-     </div>
-   )
- }
- 
- export default Navbar
+    </div>
+  )
+}
+
+export default Navbar

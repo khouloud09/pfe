@@ -1,28 +1,34 @@
 import React from 'react';
 import "./Sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../context/darkModeContext";
 import { useContext } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faAddressCard, faArrowRightFromBracket, faBell, faChartLine, faChartSimple, faGear, faStore, faUser } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../redux/Slices/UserSlice';
 
 const Sidebar = () => {
-    const { dispatch } = useContext(DarkModeContext);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo2">Dashboard</span>
+          <span className="logo2">Acceuil</span>
         </Link>
       </div>
       <hr />
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
+          <Link to="/dashboard">
           <li>
           <i><FontAwesomeIcon icon={faChartLine} /></i>
             <span>Dashboard</span>
           </li>
+          </Link>
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
@@ -59,7 +65,8 @@ const Sidebar = () => {
           </li>
           <li>
           <i><FontAwesomeIcon icon={faArrowRightFromBracket} /></i>
-            <span>Logout</span>
+            <span onClick={()=>{dispatch(logout());
+              navigate("/")            }}>Logout</span>
           </li>
         </ul>
       </div>

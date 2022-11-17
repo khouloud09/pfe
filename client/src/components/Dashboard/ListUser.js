@@ -79,7 +79,7 @@ console.log(Users)
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/view" style={{ textDecoration: "none" }}>
+            <Link to="/users/view" state={{user:params.row}} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
@@ -99,7 +99,7 @@ console.log(Users)
     <div className="datatable">
       <div className="datatableTitle">
         Add New User
-        <Link to="/register" className="link">
+        <Link to='/register' className="link">
           Add New
         </Link>
       </div>

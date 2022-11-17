@@ -5,10 +5,9 @@ import axios from "axios";
 export const addAnnonce = createAsyncThunk("annonce/add",async(annonce)=> {
     try {
         let response = await axios.post("http://localhost:5000/annonce/add",annonce);
-  
         return await response.data;
     } catch (error) {
-        console.log(error);
+        return error.response.data
     }
 });
 // get all annonce
@@ -47,10 +46,45 @@ export const allAnnonces = createAsyncThunk("annonce/Annonces", async () => {
         console.log(error)
     }
   });
+
+  export const addFavoris = createAsyncThunk("AddFavorisToUser",async(id,annonce)=>{
+    try {
+      let response = await axios.put(`http://localhost:5000/annonce/addfavoris`,{user_id:id,annonce})
+      return response.data;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  )
+
+  export const getAnnonceById = createAsyncThunk("annonce/getbyid", async ({id}) => {
+    try {
+      let response = await axios.get(`http://localhost:5000/annonce/get/${id}`) 
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+  });
+  
+  export const getAnnonceByIdUser = createAsyncThunk("annonce/getbyiduser", async ({id_user}) => {
+    try {
+      let response = await axios.get(`http://localhost:5000/annonce/getAnn/${id_user}`) 
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+  });
+  
+  
+
 const initialState = {
     annonce: null,
     status:null,
     annonces: null,
+    favoris:[],
+    userAnnonce:null,
+    errors:null,
   }
   
   const AnnonceSlice = createSlice({
@@ -68,8 +102,9 @@ const initialState = {
             state.status = "success";
             state.annonce = action.payload?.annonce;
           },
-          [addAnnonce.rejected]: (state) => {
+          [addAnnonce.rejected]: (state,action) => {
             state.status = "failed";
+            state.errors= action.payload?.errors
           },
           //get all annonces
           [allAnnonces.pending]: (state) => {
@@ -115,6 +150,32 @@ const initialState = {
           [deleteAnnonce.rejected]: (state) => {
             state.status = "failed";
           },
+               // get annonce by id
+          [getAnnonceById.pending]: (state) => {
+            state.status = "pending";
+          },
+          [getAnnonceById.fulfilled]: (state, action) => {
+            state.status = "success";
+            // console.log(state.favoris?.filter(el=>el?._id==action.payload?.annonce?._id)[0]._id)
+            if (!!state.favoris?.filter(el=> el?._id===action.payload?.annonce?._id)) {
+              state.favoris.push(action.payload?.annonce);}
+            // state.favoris.push(action.payload?.annonce) ;
+          },
+          [getAnnonceById.rejected]: (state) => {
+            state.status = "failed";
+          },
+           // get annonce by id_user
+          [getAnnonceByIdUser.pending]: (state) => {
+            state.status = "pending";
+          },
+          [getAnnonceByIdUser.fulfilled]: (state, action) => {
+            state.status = "success";
+            state.userAnnonce = action.payload?.userAnnonce;
+          },
+          [getAnnonceByIdUser.rejected]: (state) => {
+            state.status = "failed";
+          },
+         
     },
   })
   

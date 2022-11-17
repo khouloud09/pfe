@@ -3,8 +3,9 @@ header {
   height: 15vh;
   box-shadow: 0 5px 30px rgb(0 22 84 / 10%);
   padding: 15px 0;
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100vw;
   z-index: 99999;
 }
 header img {
@@ -36,6 +37,22 @@ header h4 {
 header .toggle {
   display: none;
 }
+.compte i{
+  display: inline-block;
+  border-radius: 50%;
+
+  padding: 10px 0;
+  margin-right: 20px;
+  color:#777;
+  font-size: 30px;
+
+}
+.compte i:hover{
+ color:#27ae60;
+
+
+}
+
 @media screen and (max-width: 768px) {
   header {
     padding: 0;

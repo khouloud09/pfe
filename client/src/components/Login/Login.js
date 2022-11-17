@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom'
-import { userLogin } from '../redux/Slices/UserSlice';
+import { Link, useNavigate } from 'react-router-dom'
+import { userLogin } from '../../redux/Slices/UserSlice';
+import "./Login.css"
 
 const Login = () => {
     const isAuth = localStorage.getItem("token");
+    const navigate = useNavigate()
     const  [login, setlogin] = useState({
         email: "",
         password: "",
@@ -12,45 +14,53 @@ const Login = () => {
          const dispatch =useDispatch();
   return (
     <div>
-          <div className='login'>
-    <div className='container'>
-    <div className="form-group">
+       {isAuth?
+    navigate("/"):null}
+          <div className='form_signup shadow'>
+    <div className='container-form'>
+    <div className="signup">
       <label>Email ou Téléphone</label>
+      </div>
+      <div className="signup-group">
       <input  
        type="text"
         required=""
-          className="form-control" 
-          placeholder="exemple : jean.dupont@domaine.com ou 22123456"
+          placeholder="Email ou Téléphone"
           onChange={(e)=>setlogin({...login,email:e.target.value})}
           />
       <small className="help-block" >Veuillez renseigner ce champ.</small>
       </div>
-      <div className="form-group">
+      <div className="signup">
       <label>Mot de passe</label>
-
+      </div>
+      <div className="signup-group">
       <input type="password"
-       required="" id="password"
+       required="" 
         name="password" 
-        className="form-control"
          placeholder="Mot de passe"
          onChange={(e)=>setlogin({...login, password:e.target.value})}
          />
       <small className="help-block" >Veuillez renseigner ce champ.</small>
-      <a  className="pull-right"> Mot de passe oublié ? </a>
       </div>
+      <div className="signup-group">
       <input 
       type="submit"
-       className="btn" 
+      className="validation"
        value="  Se connecter"
-       onClick={()=>{dispatch(userLogin(login))}}
+       onClick={()=>{dispatch(userLogin(login));
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);}}
        /> 
+       </div>
       <p className="link">Don't have an account?<br />
-                    <Link to="/register"><span>Sign Up </span> </Link>here</p>
+                    <Link to="/register"><span> Sign Up </span> </Link> here </p>
 
 
 
      
     </div>
+   
   </div>
        </div>
   

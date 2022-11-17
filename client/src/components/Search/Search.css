@@ -1,17 +1,25 @@
-.container_box {
-    background-color: #fff;
-    border-radius: 5px;
-    margin-top: 50px;
-    padding: 0 20px;
-  }
-  .container_box input {
-    padding: 10px;
-    width: 100%;
-    border: 1px solid rgba(128, 128, 128, 0.2);
-    margin-top: 5px;
-    border-radius: 5px;
-  }
-  .container_box select {
+
+  .container_box{
+  background-image: url("../../../public/images/slider3.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 500px;
+  width: 100%;
+  object-fit: cover;
+  
+}
+.container_box .container{
+  padding-top: 15%;
+}
+.tab{
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 50px;
+
+  padding: 0 20px;
+}
+  .box select {
     padding: 10px;
     width: 100%;
     border: 1px solid rgba(128, 128, 128, 0.2);
@@ -19,20 +27,31 @@
     border-radius: 5px;
     font-size: 17px;
     color: black;
+  }
+  .box input{
+    padding: 10px;
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    margin-top: 5px;
+    border-radius: 5px;
+  }
+  .box input::placeholder {
+    font-size: 17px;
+    color: black;
+  }
+  .tab span {
+    font-size: 14px;
+    color: grey;
   }
   
 
-  .container_box input::placeholder {
-    font-size: 17px;
-    color: black;
-  }
-  .container_box .box {
+  .tab .box {
     padding: 15px;
     border-left: 1px solid rgba(128, 128, 128, 0.2);
   }
-  .container_box .box:nth-child(1) {
+  .tab .box:nth-child(1) {
     border-left: none;
   }
-  .container_box h4 {
+  .tab h4 {
     font-weight: 500;
   }

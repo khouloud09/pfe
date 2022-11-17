@@ -1,0 +1,59 @@
+.back{
+    background-image:url("./../../../public/images/back.png");
+    height: 40vh;
+    position: relative;
+    object-fit: cover;
+   
+    
+}
+.back h1{
+    color: rgb(238, 229, 229);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+    position: absolute;
+    top: 100px;
+    left: 30px;
+}
+.container2{
+    max-width: 70%;
+    margin:50px auto;
+    
+}
+
+.content h3{
+    padding: 20px 0 0 30px;
+}
+.contact {
+    display: flex;
+    padding:0 10px;
+    margin: 20px;
+   
+    
+  }
+  .content textarea {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 92%;
+    border-radius: 5px;
+    margin:0 20px 30px 30px;
+    padding: 10px;
+    font-size: 15px;
+    
+  }
+  .content input {
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 6px 12px;
+    color:#555;
+    font-size: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+     height: 35px;
+    background: transparent;
+    width: 90%;
+    
+  }
+  .content button{
+    display: flex;
+   margin: 0 30px;
+  }
+ 

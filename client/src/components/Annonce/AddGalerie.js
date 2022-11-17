@@ -77,10 +77,9 @@ function AddGalerie({setAnnonce,annonce, ping, setPing}) {
   };
 
   return (
+    
     <div className="Image">
           <div className="addImage">
-            <label for="input-upload">
-              Ajouter une photo</label>
               <input
                 className="input-upload"
                 type="file"
@@ -104,8 +103,9 @@ onClick={() => handleDrop()}> upload
             <label for="progress-bar">0%</label>
             <progress id="progress-bar" value="0" max="100"></progress>
           </div>
-
+     <div className="galerie">
           {file?.galerie?.map((image,i)=><img alt="aya 7aja" key={i} src={image.url}/>)}
+          </div>
     </div>
   )
 }

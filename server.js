@@ -13,7 +13,7 @@ app.use(cors());
 
 app.use('/user',require('./routes/user'));
 app.use('/annonce',require('./routes/annonce'));
-
+app.use('/fav',require('./routes/listFavoris'));
 
 
 

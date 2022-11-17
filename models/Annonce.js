@@ -33,10 +33,7 @@ const AnnonceSchema = new schema({
             type: String,
             required: true
         },
-    duree:{
-            type:[String] ,
-            required:true
-        },
+   
         localisationMap: {
             lat: {
                 type: String,
@@ -56,10 +53,21 @@ const AnnonceSchema = new schema({
             type:[{url:String}],
             required:true
         },
+
+        duree:{
+            type:[String] ,
+            
+        },
+       
+
         options:{
             type:[String],
-            required:true
+            
         },
+        likers: {
+            type: [String],
+            required: true,
+          },
        
         surfaceHabitable: { type: String },
         surfaceTerrain: { type: String },
@@ -69,6 +77,8 @@ const AnnonceSchema = new schema({
         nbrEtage: { type: Number, min: 0 },
         dateConstruction: { type: String },
         option: [String],
+        etat:  { type:Boolean,
+        default:false}
     },
     { timestamps: true }
     )
