@@ -77,8 +77,7 @@ const AnnonceSchema = new schema({
         nbrEtage: { type: Number, min: 0 },
         dateConstruction: { type: String },
         option: [String],
-        etat:  { type:Boolean,
-        default:false}
+        valide: { type: String, required: true, default: "en cours de traitement" },
     },
     { timestamps: true }
     )

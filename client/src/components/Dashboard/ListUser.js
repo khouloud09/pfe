@@ -13,7 +13,7 @@ const ListUser = () => {
     const Users = useSelector((state)=>state.user?.users);
     const [ping, setPing] = useState(false);
   
-console.log(Users)
+
    const userColumns = [
         { field: "_id", headerName: "ID", width: 70 },
         {
@@ -50,16 +50,10 @@ console.log(Users)
             width: 100,
           },
         {
-          field: "status",
+          field: "valide",
           headerName: "Status",
           width: 160,
-          // renderCell: (params) => {
-          //   return (
-          //     <div className={`cellWithStatus ${params.row.status}`}>
-          //       {params.row.status}
-          //     </div>
-          //   );
-        //   },
+
         },
       ];
       

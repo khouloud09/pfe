@@ -44,6 +44,16 @@ export const getUserByID = createAsyncThunk("user/get/:id", async (id) => {
     console.log(error);
   }
 });
+// get user by idAnnonce
+export const getUserByIDAnn = createAsyncThunk("user/getAnn/:id", async ({id_Annonce}) => {
+
+  try {
+    let response = await axios.get(`http://localhost:5000/user/getAnn/${id_Annonce}`);
+    return await response.data;
+  } catch (error) {
+    console.log(error);
+  }
+});
   // get all users
   export const getUser = createAsyncThunk("user/get/", async () => {
     try {
@@ -97,7 +107,7 @@ export const likeAnnonce = createAsyncThunk("annonce/like", async ({id_user,anno
       console.log(error)
   }
 });
-export const unLikeAnnonce = createAsyncThunk("annonce/like", async ({id_user,annonceId}) => {
+export const unLikeAnnonce = createAsyncThunk("annonce/unlike", async ({id_user,annonceId}) => {
 
   try {
     let response = await axios.patch(`http://localhost:5000/annonce/unlike/${id_user}`,annonceId) 
@@ -110,7 +120,9 @@ const initialState = {
     user: null,
     status:null,
     users:[],
+
     searchedUser:null,
+    searchedUserAnn :null,
     newuserupdated: {},
 
     userUpdated: null,
@@ -174,6 +186,18 @@ const initialState = {
           [getUserByID.pending]: (state) => {
             state.status = "pending";
           },
+           // get user by idAnnonce
+           [getUserByIDAnn.fulfilled]: (state, action) => {
+            state.status = "success";
+            
+            state.searchedUserAnn = action.payload?.user;
+          },
+          [getUserByIDAnn.rejected]: (state) => {
+            state.status = "failed";
+          },
+          [getUserByIDAnn.pending]: (state) => {
+            state.status = "pending";
+          },
             // get all users
             [getUser.fulfilled]: (state, action) => {
               state.status = "success";
@@ -227,7 +251,8 @@ const initialState = {
           },
           [likeAnnonce.fulfilled]: (state, action) => {
             state.status = "success";
-            state.user = action.payload?.user;
+             state.user = action.payload?.user;
+            
           },
           [likeAnnonce.rejected]: (state) => {
             state.status = "failed";
@@ -238,9 +263,10 @@ const initialState = {
             },
             [unLikeAnnonce.fulfilled]: (state, action) => {
               state.status = "success";
-              state.user = action.payload?.user;
+              console.log(action.payload)
+               state.user = action.payload?.user;
             },
-            [likeAnnonce.rejected]: (state) => {
+            [unLikeAnnonce.rejected]: (state) => {
               state.status = "failed";
             },
     },

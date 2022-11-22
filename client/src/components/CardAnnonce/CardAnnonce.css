@@ -92,3 +92,107 @@ color: #ff9800;
   font-size: 14px;
   float: left;
 }
+/* Annonce details */
+.details{
+  margin-top: 50px;
+  margin-left: 50px;
+  width: 60%;
+}
+.detail{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+.detail h1{
+  text-transform: capitalize;
+  font-weight: 300;
+  font-size: 28px;
+  color: #7e93c4;
+}
+.detail p i {
+  font-size: 16px;
+}
+.detail-row{
+  padding:0 20px 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: black;
+  border-bottom: 1px solid rgb(216, 210, 210);
+}
+.detail-row i:hover{
+  color: #25b579;
+  text-decoration-line: underline;
+
+}
+.detail-row1{
+  display: flex;
+  flex-direction:column ;
+  gap:20px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(216, 210, 210);
+}
+.detail-row1 p{
+  padding: 0 20px;
+  color: black;
+  text-transform: capitalize;
+}
+.detail-row1 a{
+  text-decoration: underline;
+  color: black;
+}
+.detail-row1 a:hover{
+  color: #25b579;
+}
+.detail-avan{
+  display: flex;
+  flex-direction: column;
+}
+.detail-avan span{
+  color: #555;
+}
+.slider-img{
+  text-align: center;
+  margin-top: 3px;
+}
+.flex-row{
+  justify-content: center;
+  display: flex;
+  padding: 20px;
+}
+.slider2{
+  padding-left: 20px;
+}
+.slider2 .clicked1{
+  border: 5px solid black;
+}
+.details-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.details-user{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  margin-right: 50px;
+  width: 28%;
+  gap:10px;
+  
+}
+.numero{
+  margin-top: 40px;
+  
+}
+.numero button{
+  width: 300px;
+}
+.numero button span{
+  display: flex;
+  flex-direction: row;
+  gap:80px;
+  font-size: 18px;
+  font-weight: 300;
+}

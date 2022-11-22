@@ -1,10 +1,12 @@
 .avantage{
    
-    margin-top: 50px;
-    width: 100%;
-   
+    margin: 50px;
+
+    justify-content: center;
+    align-items: center;
+
 }
-.avantage h1{
+.avantage h2{
     padding: 20px 40px;
    
 }
@@ -23,9 +25,10 @@
     align-items: center;
     line-height: 1.5;
     margin: 20px;
-    background-color: #ccc;
+    background-color: rgb(230, 222, 222);
     color:  #555;
     border-radius: 20px;
+    /* transform: translateY(-50%); */
     
     /* box-sizing: border-box; */
 }

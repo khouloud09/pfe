@@ -1,7 +1,7 @@
 import "./NavbarDash.css";
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faMessage, faMoon, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faMessage,  faSearch } from '@fortawesome/free-solid-svg-icons'
 import { DarkModeContext } from "../context/darkModeContext";
 import { useContext } from "react";
 
@@ -21,11 +21,11 @@ const NavbarDash = () => {
           </div>
           <div className="item">
           <i><FontAwesomeIcon icon={faMessage} /></i>
-            <div className="counter">1</div>
+            <div className="counter">0</div>
           </div>
           <div className="item">
           <i><FontAwesomeIcon icon={faBell} /></i>
-            <div className="counter">2</div>
+            <div className="counter">0</div>
           </div>
           <div className="item">
             

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAnnonceById } from '../redux/Slices/AnnonceSlice'
 
 
-const Navbar = ({favLength}) => {
+const Navbar = () => {
 
   const [navList, setNavList] = useState(false)
   const User = useSelector((state) => state.user?.user)
@@ -43,7 +43,7 @@ const Navbar = ({favLength}) => {
             {isAuth ? (
               <>
                 <h4>
-                  <span>{favLength}</span> Mes Favoris
+                  <span>0</span> Mes Favoris
                 </h4>
                 {User?.isAdmin ? (
                   <>

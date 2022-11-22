@@ -12,12 +12,13 @@ const DashProfil = () => {
  
    const user= useSelector((state)=>state.user?.user)
    const dispatch= useDispatch()
-
+  
    useEffect(() => {
    dispatch(getAnnonceByIdUser({id_user:user?._id}))
    }, [dispatch]);
 
    const userAnnonce=useSelector(state=>state.annonce?.userAnnonce)
+   
 
   return (
     <div className="list">
@@ -29,7 +30,6 @@ const DashProfil = () => {
         <select type="text" >
            <option value="">Tout</option>
             <option value="1">Validée</option>
-            <option value="2">Expirée</option>
             <option value="2">En attente</option>
             </select>
         </div>

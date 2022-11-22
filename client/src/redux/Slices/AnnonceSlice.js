@@ -1,3 +1,4 @@
+import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from "axios";
 // add a new annonce
@@ -32,6 +33,15 @@ export const allAnnonces = createAsyncThunk("annonce/Annonces", async () => {
   export const updateAnnonce = createAsyncThunk("annonce/update/:id", async ({id,annonce}) => {
     try {
       let response = await axios.put(`http://localhost:5000/annonce/update/${id}`,annonce) 
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+  });
+   // validation annonce
+   export const validationAnnonce = createAsyncThunk("annonce/update/valide/:id", async (id) => {
+    try {
+      let response = await axios.put(`http://localhost:5000/annonce/update/valide/${id}`) 
         return response.data;
     } catch (error) {
         console.log(error)
@@ -75,7 +85,16 @@ export const allAnnonces = createAsyncThunk("annonce/Annonces", async () => {
         console.log(error)
     }
   });
-  
+  //get userAnnonce
+  export const getUserAnnonce= createAsyncThunk("annonce/userAnn/:id", async ({id_user}) => {
+    
+    try {
+      let response = await axios.get(`http://localhost:5000/annonce/userannonce/${id_user}`) 
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+  });
   
 
 const initialState = {
@@ -84,7 +103,8 @@ const initialState = {
     annonces: null,
     favoris:[],
     userAnnonce:null,
-    errors:null,
+   userAnn:[],
+  
   }
   
   const AnnonceSlice = createSlice({
@@ -139,6 +159,17 @@ const initialState = {
           [updateAnnonce.rejected]: (state) => {
             state.status = "failed";
           },
+           // validation annonce
+           [validationAnnonce.pending]: (state) => {
+            state.status = "pending";
+          },
+          [validationAnnonce.fulfilled]: (state, action) => {
+            state.status = "success";
+            state.annonce = action.payload?.annonce;
+          },
+          [validationAnnonce.rejected]: (state) => {
+            state.status = "failed";
+          },
            // delete annonce
            [deleteAnnonce.pending]: (state) => {
             state.status = "pending";
@@ -175,7 +206,19 @@ const initialState = {
           [getAnnonceByIdUser.rejected]: (state) => {
             state.status = "failed";
           },
-         
+            //get userAnnonce
+            [getUserAnnonce.pending]: (state) => {
+              state.status = "pending";
+            },
+            [getUserAnnonce.fulfilled]: (state, action) => {
+              state.status = "success";
+              state.userAnn = action.payload?.userAnn;
+             
+             
+            },
+            [getUserAnnonce.rejected]: (state) => {
+              state.status = "failed";
+            },
     },
   })
   

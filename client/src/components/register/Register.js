@@ -1,11 +1,11 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { userRegister } from '../../redux/Slices/UserSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faHouseUser, faLock, faPhone, faUser } from '@fortawesome/free-solid-svg-icons'
 
 import "./Register.css"
-import { addListFavoris } from '../../redux/Slices/ListFavoris';
+
 const Register = () => {
      const [ping, setPing] = useState(false);
      const [user, setuser] = useState({
@@ -17,7 +17,7 @@ const Register = () => {
           password: "",
           isAdmin: false,
      });
- 
+
 
 
      const dispatch = useDispatch();
@@ -127,27 +127,27 @@ const Register = () => {
 
                <div className="signup-group  ">
 
-                   
 
 
-                         <span >
-                              <i><FontAwesomeIcon icon={faLock} /></i>
-                         </span>
-                         <input type="password"
-                              placeholder="Mot de passe"
-                              name="password"
-                              onChange={(e) => setuser({ ...user, password: e.target.value })}
-                         />
-                    </div>
 
-                    <div className="signup-group  ">
-                         <span >
-                              <i><FontAwesomeIcon icon={faLock} /></i>
-                         </span>
-                         <input type="password"
-                              placeholder="Confirmation du mot de passe"
-                         />
-                    
+                    <span >
+                         <i><FontAwesomeIcon icon={faLock} /></i>
+                    </span>
+                    <input type="password"
+                         placeholder="Mot de passe"
+                         name="password"
+                         onChange={(e) => setuser({ ...user, password: e.target.value })}
+                    />
+               </div>
+
+               <div className="signup-group  ">
+                    <span >
+                         <i><FontAwesomeIcon icon={faLock} /></i>
+                    </span>
+                    <input type="password"
+                         placeholder="Confirmation du mot de passe"
+                    />
+
                </div>
 
                <div className="signup-group  ">
@@ -157,11 +157,10 @@ const Register = () => {
                          value="S'inscrire "
                          onClick={() => {
                               dispatch(userRegister(user));
-                              // dispatch(addListFavoris({id_user:user?._id,list_Annonce:[] }))
                               setPing(!ping);
-                               setTimeout(() => {
+                              setTimeout(() => {
                                    window.location = "/login"
-                                  }, 2200);
+                              }, 2200);
                          }}
                     />
 

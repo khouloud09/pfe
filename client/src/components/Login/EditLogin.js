@@ -12,7 +12,7 @@ const EditLogin = () => {
     const [ping, setPing] = useState(false);
 
     const handleUpdate = (id) => {
-        dispatch(updateUser({id, update:newUser}));
+        dispatch(updateUser({ id, update: newUser }));
         setPing(!ping);
     };
     const [password, setpassword] = useState({ password: user.password });
@@ -107,7 +107,7 @@ const EditLogin = () => {
                 <input
                     onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
                     defaultValue={user.email}
-                    
+
                 />
 
             </div>
@@ -122,7 +122,7 @@ const EditLogin = () => {
                     <i><FontAwesomeIcon icon={faLock} /></i>
                 </span>
                 <input onChange={(e) => setpassword({ ...password, password: e.target.value })}
-                defaultValue={user.password}
+                    defaultValue={user.password}
                 />
             </div>
 

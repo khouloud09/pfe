@@ -1,8 +1,8 @@
 
-import React, { useState } from 'react'
+import React from 'react'
 import { Map, TileLayer, Marker, ZoomControl } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import L, { marker } from 'leaflet'
+import L from 'leaflet'
 
 
 
@@ -19,8 +19,8 @@ const MapShow = ({ position }) => {
 
 
     return (
-        <div>
-            <Map center={[position.lat, position.lng]} zoom={12} ZoomControl={false}>
+        <div >
+            <Map center={[position.lat, position.lng]} zoom={14} ZoomControl={false} style={{width:"700px",marginBottom:"10px"}}>
                 <TileLayer
                     attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 
 import {  useDispatch, useSelector } from "react-redux";
-import { deleteAnnonce } from "../../../redux/Slices/AnnonceSlice";
+import { deleteAnnonce, validationAnnonce } from "../../../redux/Slices/AnnonceSlice";
 import Sidebar from "../Sidebar/Sidebar";
 import NavbarDash from "../Navbar/NavbarDash";
 
@@ -11,6 +11,7 @@ const UsersAnnonce = () => {
     const dispatch =useDispatch()
     const Annonces = useSelector((state)=>state?.annonce?.annonces);
     const [ping, setPing] = useState(false);
+
 
    const annonceColumns = [
         { field: "_id", headerName: "ID", width: 70 },
@@ -42,50 +43,26 @@ const UsersAnnonce = () => {
           field: "createdAt",
           headerName: "Date de publication",
           width: 230,
-          // renderCell: (params) => {
-          //   return (
-          //     <div className="cellWithImg">
-          //       {params.row.createdAt}
-          //     </div>
-          //   );
-          // },
+       
         },
       
         {
-          field: "type de l'annonce",
+          field: "typeAnnonce",
           headerName: "Type de l'annonce",
           width: 100,
-          // renderCell: (params) => {
-          //   return (
-          //     <div className="cellWithImg">
-          //       {params.row.typeAnnonce}
-          //     </div>
-          //   );
-          // },
+     
         },
         {
             field: "categorie",
             headerName: "Categorie",
             width: 100,
-            // renderCell: (params) => {
-            //   return (
-            //     <div className="cellWithImg">
-            //       {params.row.categorie}
-            //     </div>
-            //   );
-            // },
+          
           },
         {
-          field: "status",
+          field: "valide",
           headerName: "Status",
           width: 160,
-          // renderCell: (params) => {
-          //   return (
-          //     <div className={`cellWithStatus ${params.row.status}`}>
-          //       {params.row.status}
-          //     </div>
-          //   );
-          // },
+     
         },
       ];
       
@@ -95,12 +72,15 @@ const UsersAnnonce = () => {
     dispatch(deleteAnnonce(id));
     setPing(!ping);
   };
-
+  const handleUpdate = (id) => {
+    dispatch(validationAnnonce(id));
+    setPing(!ping);
+  };
   const actionColumn = [
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 250,
       renderCell: (params) => {
         return (
           <div className="cellAction">
@@ -115,10 +95,13 @@ const UsersAnnonce = () => {
               Delete
             </div>
             <Link to="/annonces/edit" state={{annonce:params.row}} style={{ textDecoration: "none" }}>
-            <div className="viewButton">
+            <div className="editButton">
               Edit
             </div>
             </Link>
+            <div className="updateButton" onClick={()=> (handleUpdate(params.row._id))}>
+            update 
+            </div>
           </div>
         );
       },

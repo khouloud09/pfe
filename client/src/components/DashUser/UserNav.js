@@ -64,53 +64,8 @@ const UserNav = () => {
     </div>
     
   </div>
-    // <div className='dash_nav'>
-    //     <div className='nav_user'>
-    //     <div className="wrapper">
-        
-    //     <div className="search">
-    //       <select type="text" >
-    //         <option value="">Tout</option>
-    //         <option value="1">Validée</option>
-    //         <option value="2">Expirée</option>
-    //         <option value="2">En attente</option>
-    //         </select>
-      
-    //     </div>
-    //     <div className="items">
-    //     <div className="item">
-    //       <i><FontAwesomeIcon icon={faHome} /></i>
-    //        <Link to="/"> <span>Acceuil</span></Link>
-    //       </div>
-    //       {/* <div className="item">
-    //       <Link to="/" aria-current="page"><span>Accueil</span></Link>
-    //       </div> */}
-    //       <div className="item">
-    //       <i><FontAwesomeIcon icon={faList} /></i>
-    //       <Link to="/DashUser/mesAnnonces" ><span>Mes annonces</span></Link>
-    //       </div>
-    //       <div className="item">
-    //       <i><FontAwesomeIcon icon={faHeart} /></i>
-    //       <Link to="/DashUser/favoris" ><span>Mes favoris</span></Link>
-    //       </div>
-          
-    //       <div className="item">
-            
-    //       </div>
-    //       <div className="item">
-    //       <i><FontAwesomeIcon icon={faUser} /></i>
-    //       <span>Profile</span>
-    //         {/* <img
-    //        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"              alt=""
-    //           className="avatar"
-    //         /> */}
-    //       </div>
-    //     </div>
-    //   </div>
-    //     </div>
-    //     <hr />
-      
-    // </div>
+    
+  
   )
 }
 

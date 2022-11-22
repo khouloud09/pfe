@@ -22,9 +22,9 @@ const Modal_Annonce = ({ ping, setPing }) => {
     const user = useSelector((state) => state.user?.user)
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const [ping, setPing] = useState(false);
+
     const [annonce, setAnnonce] = useState({
-        // localisationMap:{lat:'30',lng:'10'},
+
         id_user: user?._id,
         user_name: user?.name,
         galerie: [],
@@ -43,22 +43,22 @@ const Modal_Annonce = ({ ping, setPing }) => {
         setAnnonce({ ...annonce, options: updatedList })
     };
 
-  const  switcher = (cat) => {
+    const switcher = (cat) => {
         switch (cat) {
             case 'Autres':
-             return   <AutresField annonce={annonce} setAnnonce={setAnnonce} handleCheck={handleCheck} />
-                case 'Maison':
-                    return   <MaisonField annonce={annonce} setAnnonce={setAnnonce} handleCheck={handleCheck}/>
-                case 'Appartement':
-                   return   <AppartementField annonce={annonce} setAnnonce={setAnnonce} handleCheck={handleCheck} />
+                return <AutresField annonce={annonce} setAnnonce={setAnnonce} handleCheck={handleCheck} />
+            case 'Maison':
+                return <MaisonField annonce={annonce} setAnnonce={setAnnonce} handleCheck={handleCheck} />
+            case 'Appartement':
+                return <AppartementField annonce={annonce} setAnnonce={setAnnonce} handleCheck={handleCheck} />
             case 'Terrain':
-             return  <TerrainField annonce={annonce} setAnnonce={setAnnonce}  />
-             case 'Local commercial':
-                return  <LocalCommercialField annonce={annonce} setAnnonce={setAnnonce} handleCheck={handleCheck} />
-                case 'Bureau':
-                    return  <BureauField annonce={annonce} setAnnonce={setAnnonce} handleCheck={handleCheck} />
-                    case 'Place de parc':
-                        return  <PlaceParcField annonce={annonce} setAnnonce={setAnnonce}  />
+                return <TerrainField annonce={annonce} setAnnonce={setAnnonce} />
+            case 'Local commercial':
+                return <LocalCommercialField annonce={annonce} setAnnonce={setAnnonce} handleCheck={handleCheck} />
+            case 'Bureau':
+                return <BureauField annonce={annonce} setAnnonce={setAnnonce} handleCheck={handleCheck} />
+            case 'Place de parc':
+                return <PlaceParcField annonce={annonce} setAnnonce={setAnnonce} />
             default:
                 break;
         }
@@ -125,8 +125,8 @@ const Modal_Annonce = ({ ping, setPing }) => {
                         <small className="help-block">Veuillez renseigner ce champ.</small>
 
                         <div className='info'>
-                        <span><i > <FontAwesomeIcon icon={faInfoCircle} /></i> Le Titre ne dépasse pas 100 caractères .</span>
-</div>
+                            <span><i > <FontAwesomeIcon icon={faInfoCircle} /></i> Le Titre ne dépasse pas 100 caractères .</span>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -162,7 +162,7 @@ const Modal_Annonce = ({ ping, setPing }) => {
 
                     <div className="row">
                         <label>Photos <span className="error">*</span> </label>
-                        <AddGalerie setAnnonce={setAnnonce} annonce={annonce} ping={ping} setPing={setPing}/>
+                        <AddGalerie setAnnonce={setAnnonce} annonce={annonce} ping={ping} setPing={setPing} />
                         <div className='info'>
 
                             <span><i><FontAwesomeIcon icon={faInfoCircle} /> </i>Vous pouvez télécharger 4 photo(s) GRATUITEMENT<br />
@@ -194,23 +194,23 @@ const Modal_Annonce = ({ ping, setPing }) => {
                             <option >Nouvelle Matmata</option>
                         </datalist>
                         <div className='info'>
-                        <span  ><i><FontAwesomeIcon icon={faInfoCircle} /> </i>Veuillez choisir une delegation.</span>
+                            <span  ><i><FontAwesomeIcon icon={faInfoCircle} /> </i>Veuillez choisir une delegation.</span>
                         </div>
                     </div>
-                   
+
                     {switcher(cat)}
 
-                   
+
                     <div className="row_Modal ">
                         <button type="submit" className='btn_modal'
                             onClick={async () => {
-                                const response = await window.confirm("Mthabet felli ktabtah lkol maho ??? zid thabet?");
+                                const response = await window.confirm("Votre demande a été envoyée avec succès.");
 
                                 if (response) {
                                     dispatch(addAnnonce(annonce));
                                     setPing(!ping);
                                     setTimeout(() => {
-                                        alert('mrigal sayet tzadet egleb mandhrak taw ok!!')
+                                        alert('votre demande est en cours de traitement')
                                         navigate('/')
                                     }, 1200);
                                 }

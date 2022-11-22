@@ -11,113 +11,100 @@ import { deleteAnnonce, getAnnonceByIdUser } from '../../redux/Slices/AnnonceSli
 
 
 const DashAnn = () => {
- 
-  const dispatch =useDispatch()
+
+  const dispatch = useDispatch()
   const [ping, setPing] = useState(false);
-  const user= useSelector((state)=>state.user?.user)
+  const user = useSelector((state) => state.user?.user)
 
 
   useEffect(() => {
-  dispatch(getAnnonceByIdUser({id_user:user?._id}))
+    dispatch(getAnnonceByIdUser({ id_user: user?._id }))
   }, [dispatch]);
 
-  const userAnnonce=useSelector(state=>state.annonce?.userAnnonce)
+  const userAnnonce = useSelector(state => state.annonce?.userAnnonce)
 
 
- const annonceColumns = [
-      { field: "_id", headerName: "ID", width: 70 },
-    
-      {
-          field: "titre",
-          headerName: "Annonce",
-          width: 230,
-        
-        },
-      {
-        field: "createdAt",
-        headerName: "Date de publication",
-        width: 230,
-     
-      },
+  const annonceColumns = [
+    { field: "_id", headerName: "ID", width: 70 },
 
- 
-      {
-        field: "status",
-        headerName: "Status",
-        width: 160,
-      
-      },
-    ];
-    
+    {
+      field: "titre",
+      headerName: "Annonce",
+      width: 230,
 
-
-const handleDelete = (id) => {
-  dispatch(deleteAnnonce(id));
-  setPing(!ping);
-};
-
-const actionColumn = [
-  {
-    field: "action",
-    headerName: "Action",
-    width: 200,
-    renderCell: (params) => {
-      return (
-        <div className="cellAction">
-          <Link to={`/details/${params.row.titre}`} state={{annonce:params.row}} style={{ textDecoration: "none" }}>
-            <div className="viewButton">View</div>
-          </Link>
-          <div
-            className="deleteButton"
-            onClick={() => 
-              handleDelete(params.row._id)}
-          >
-            Delete
-          </div>
-          <Link to="/annonces/edit" state={{annonce:params.row}} style={{ textDecoration: "none" }}>
-          <div className="viewButton">
-            Edit
-          </div>
-          </Link>
-        </div>
-      );
     },
-  },
-];
+    {
+      field: "createdAt",
+      headerName: "Date de publication",
+      width: 230,
+
+    },
+
+
+    {
+      field: "valide",
+      headerName: "Status",
+      width: 160,
+
+    },
+  ];
+
+
+
+  const handleDelete = (id) => {
+    dispatch(deleteAnnonce(id));
+    setPing(!ping);
+  };
+
+  const actionColumn = [
+    {
+      field: "action",
+      headerName: "Action",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className="cellAction">
+            <Link to={`/details/${params.row.titre}`} state={{ annonce: params.row }} style={{ textDecoration: "none" }}>
+              <div className="viewButton">View</div>
+            </Link>
+            <div
+              className="deleteButton"
+              onClick={() =>
+                handleDelete(params.row._id)}
+            >
+              Delete
+            </div>
+            <Link to="/annonces/edit" state={{ annonce: params.row }} style={{ textDecoration: "none" }}>
+              <div className="viewButton">
+                Edit
+              </div>
+            </Link>
+          </div>
+        );
+      },
+    },
+  ];
   return (
-<div className="list">
-      <UserNav/>
+    <div className="list">
+      <UserNav />
       <div className="listContainer ">
-      <div className="navbar">
-      <div className="wrapper">
-        <div className="search">
-        <select type="text" >
-           <option value="">Tout</option>
-            <option value="1">Validée</option>
-            <option value="2">Expirée</option>
-            <option value="2">En attente</option>
-            </select>
+        <div className="datatable">
+          <div className="datatableTitle">
+            Add New Annonce
+            <Link to="/annonce" className="link">
+              Add New
+            </Link>
+          </div>
+          <DataGrid
+            className="datagrid"
+            rows={userAnnonce || []}
+            getRowId={(row) => row?._id}
+            columns={annonceColumns.concat(actionColumn)}
+            pageSize={9}
+            rowsPerPageOptions={[9]}
+            checkboxSelection
+          />
         </div>
-       
-      </div>
-    </div>
-    <div className="datatable">
-      <div className="datatableTitle">
-        Add New Annonce
-        <Link to="/annonce" className="link">
-          Add New
-        </Link>
-      </div>
-      <DataGrid
-        className="datagrid"
-        rows={userAnnonce|| []}
-        getRowId={(row)=> row?._id}
-        columns={annonceColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-        checkboxSelection
-      />
-    </div>
       </div>
     </div>
   )

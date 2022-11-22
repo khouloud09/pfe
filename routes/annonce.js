@@ -75,6 +75,21 @@ router.put('/update/:id', async (req, res) => {
 
   }
 })
+//validation annonce
+router.put('/update/valide/:id', async (req,res)=>
+{
+  try {
+    const result = await Annonce.findByIdAndUpdate(
+      {_id:req.params.id},
+      {$set:{valide:true}},
+      {new: true}
+    );
+    res.send({annonce:result, msg:"annonce updated successfully"})
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ msg: "can not update the annonce" });
+  }
+})
 // delete annonce
 router.delete('/delete/:id', async (req, res) => {
   try {
@@ -100,6 +115,16 @@ router.get("/getAnn/:khouloud", async (req, res) => {
   try {
     let result = await Annonce.find({ id_user: req.params.khouloud });
     res.send({ userAnnonce: result, msg: " annonce by id_user" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+//get userAnnonce
+router.get("/userannonce/:id", async (req, res) => {
+  try {
+    let result = await Annonce.find({ id_user: req.params.id })
+      .populate("id_user", ["name", "lastName","email","phone"]);
+    res.send({ userAnn: result, msg: "user's annonces" });
   } catch (error) {
     console.log(error);
   }
@@ -145,13 +170,7 @@ router.patch("/like/:id", async (req, res) => {
       { new: true },
       
     );
-    const ListFavoris = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        $addToSet: { likes: req.body.annonceId },
-      },
-      { new: true },
-    );
+   
 
     res.status(200).send({Annonce:Favoris,user:ListFavoris})
 
@@ -161,7 +180,7 @@ router.patch("/like/:id", async (req, res) => {
 });
 // remove like
 router.patch("/unlike/:id", async (req, res) => {
-
+    console.log(req.body);
   try {
     const Favoris = await Annonce.findByIdAndUpdate(
       req.body.annonceId,
@@ -171,14 +190,14 @@ router.patch("/unlike/:id", async (req, res) => {
       { new: true },
      
     );
-    // const ListFavoris = await User.findByIdAndUpdate(
-    //   req.params.id,
-    //   {
-    //     $pull: { likes: req.body.annonceId },
-    //   },
-    //   { new: true },
+    const ListFavoris = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: { likes: req.body.annonceId },
+      },
+      { new: true },
      
-    // );
+    );
     res.status(200).send({Annonce:Favoris})
   } catch (err) {
     return res.status(400).send(err);

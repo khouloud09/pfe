@@ -73,7 +73,7 @@ const Location = () => {
             </button>
         </div>
         <div className='content grid3 mtop'>
-        {Annonces?.filter(el=>el.typeAnnonce==="A Louer").map((annonce, index) => 
+        {Annonces?.filter(el=>el.typeAnnonce==="A Louer").filter((el=>el.valide === "true")).map((annonce, index) => 
     <CardAnnonce key={index} annonce={annonce}/>
            
         )}

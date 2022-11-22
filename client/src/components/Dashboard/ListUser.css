@@ -70,8 +70,21 @@
       .cellAction .deleteButton {
         padding: 2px 5px;
         border-radius: 5px;
+        color:green;
+        border: 1px dotted rgba(17, 235, 83, 0.6);
+        cursor: pointer;
+      }
+      .cellAction .updateButton {
+        padding: 2px 5px;
+        border-radius: 5px;
         color: crimson;
         border: 1px dotted rgba(220, 20, 60, 0.6);
         cursor: pointer;
       }
-   
+      .cellAction .editButton {
+        padding: 2px 5px;
+        border-radius: 5px;
+        color: rgb(126, 203, 226);
+        border: 1px dotted rgba(141, 161, 228, 0.6);
+        cursor: pointer;
+      }

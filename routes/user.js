@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const jwt = require("jsonwebtoken");
+const ObjectID = require("mongoose").Types.ObjectId;
+
 const { loginRules, registerRules, validation } = require("../middelwares/validator");
 require("dotenv").config()
 
@@ -94,12 +96,18 @@ router.post('/login', loginRules(), validation, async (req, res) => {
 });
 // get user by id
 router.get("/get/:id", async (req, res) => {
-  try {
-    let result = await User.find({ id_user: req.params.id });
-    res.send({ user: result, msg: " user by id" });
-  } catch (error) {
-    console.log(error);
-  }
+  if (!ObjectID.isValid(req.params.id))
+  return res.status(400).send("ID unknown : " + req.params.id);
+
+try {
+const result= await User.findById(req.params.id);
+res.status(200).send({user: result,msg:"user trouve"})
+
+
+} catch (error) {
+console.log(error);
+
+}
 });
 // get all user
 router.get("/get", async (req, res) => {

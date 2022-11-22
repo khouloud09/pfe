@@ -12,18 +12,18 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getUser())
   }, [dispatch])
-  
+
   return (
     <div className="list">
-      <Sidebar/>
+      <Sidebar />
       <div className="listContainer">
-        <NavbarDash/>
+        <NavbarDash />
         <div>
-{Users?.map((user, i) => {
-  <Profil_User user={user} key={i} />
-})}
+          {Users?.map((user, i) => {
+            <Profil_User user={user} key={i} />
+          })}
         </div>
-    
+
       </div>
     </div>
   )

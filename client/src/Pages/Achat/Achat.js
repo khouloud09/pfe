@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CardAnnonce from '../../components/CardAnnonce/CardAnnonce';
-import { annonceFilter } from '../../redux/Slices/AnnonceSlice';
+import { annonceFilter, validationAnnonce } from '../../redux/Slices/AnnonceSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import "./Achat.css"
@@ -68,13 +68,14 @@ const Achat = () => {
             <button className='btn1'
              onClick={(e) => {
               dispatch(annonceFilter(text))
+              dispatch(validationAnnonce())
             }}
   >
             <i><FontAwesomeIcon icon={faSearch} /></i>
             </button>
         </div>
         <div className='content grid3 mtop'>
-        {Annonces?.filter(el=>el.typeAnnonce==="A vendre").map((annonce, index) => 
+        {Annonces?.filter(el=>el.typeAnnonce==="A vendre").filter((el=>el.valide === "true")).map((annonce, index) => 
     <CardAnnonce key={index} annonce={annonce}/>
            
         )}
